@@ -27,3 +27,7 @@ exports.createUserPost = async (req, res) => {
   res.redirect("/");
 };
  
+exports.deleteUsers = async (req, res) => {
+  await db.deleteUsers();
+  res.redirect("/");
+};
