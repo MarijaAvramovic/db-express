@@ -1,9 +1,16 @@
 const db = require("../db/queries");
 
+
 exports.getUsers = async (req, res) => {
+ 
   const users = await db.getAllUsernames();
    console.log(users);
-res.render("index", { title: "Users List", users });
+
+  const searchQuery = req.query.username || null;
+  const searchResults = await db.searchUser(searchQuery);
+
+  console.log(searchResults);
+res.render("index", { title: "Users List", users, searchResults });
 
 
 };
@@ -19,3 +26,4 @@ exports.createUserPost = async (req, res) => {
   await db.insertUsername(username);
   res.redirect("/");
 };
+ 
